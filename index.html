@@ -451,8 +451,49 @@
     cursor: default;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 340px;
+    gap: 1.5rem;
+    min-height: 430px;
+  }
+
+  .project-carousel {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+  }
+
+  .project-carousel img,
+  .project-carousel .project-carousel-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-carousel-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(180deg, rgba(14, 27, 39, 0.9), rgba(14, 27, 39, 0.98));
+  }
+
+  .carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
   }
 
   .project-card > * {
@@ -1053,6 +1094,10 @@
   <div class="projects-grid">
     <a href="https://github.com/Ivann0730/JAVA-Capstone" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <img src="images/DannyGerman/462547802_962827752531968_921286692929183774_n.png" alt="Danny German Preview 1" class="carousel-slide active">
+          <img src="images/DannyGerman/462553379_994824035743277_3505633363269665568_n.png" alt="Danny German Preview 2" class="carousel-slide">
+        </div>
         <div class="project-type">// 2D RPG · Game Dev</div>
         <span class="project-icon">🎮</span>
         <h3>#DannyGerman: The Bugged World</h3>
@@ -1067,6 +1112,9 @@
 
     <a href="https://github.com/Ivann0730/BORNEO26" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <img src="images/Borneo/s.png" alt="Borneo Preview" class="carousel-slide active">
+        </div>
         <div class="project-type">// Hackathon · Climate Tech</div>
         <span class="project-icon">🌏</span>
         <h3>BORNEO26 / STEMMA</h3>
@@ -1081,6 +1129,10 @@
 
     <a href="https://github.com/alan-hiroshima/AppDev_Project" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <img src="images/Acadmeet/Find-Tutors.png" alt="AcadMeet Preview 1" class="carousel-slide active">
+          <img src="images/Acadmeet/Become a Tutor + How it works.png" alt="AcadMeet Preview 2" class="carousel-slide">
+        </div>
         <div class="project-type">// Web Platform · Collab</div>
         <span class="project-icon">🤝</span>
         <h3>AcadMeet</h3>
@@ -1095,6 +1147,10 @@
 
     <a href="https://github.com/Smoll05/archives-mobile-development" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <img src="images/Archives/Developer Page.png" alt="Archives Preview 1" class="carousel-slide active">
+          <img src="images/Archives/Settings Page.png" alt="Archives Preview 2" class="carousel-slide">
+        </div>
         <div class="project-type">// Mobile · Android</div>
         <span class="project-icon">📚</span>
         <h3>Archives</h3>
@@ -1109,6 +1165,9 @@
 
     <a href="https://github.com/SuperaNova/PARKYU" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <div class="project-carousel-placeholder">Preview coming soon</div>
+        </div>
         <div class="project-type">// Web App · PHP</div>
         <span class="project-icon">🅿️</span>
         <h3>PARKYU</h3>
@@ -1123,6 +1182,9 @@
 
     <a href="https://github.com/Smoll05/hardstack-capstone" target="_blank" class="project-card-link">
       <div class="project-card">
+        <div class="project-carousel">
+          <img src="images/Adventure of Joe and Marie/490985914_1393284168337933_6957351029495201762_n.png" alt="Joe and Marie Preview" class="carousel-slide active">
+        </div>
         <div class="project-type">// Platformer · Collab</div>
         <span class="project-icon">🕹️</span>
         <h3>Adventures of Joe and Marie</h3>
@@ -1354,6 +1416,21 @@ function startHeroAnimation() {
       });
     });
   }
+
+  function initProjectCarousels() {
+    document.querySelectorAll('.project-carousel').forEach(carousel => {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      if (slides.length <= 1) return;
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 3200);
+    });
+  }
+
+  window.addEventListener('load', initProjectCarousels);
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
