@@ -455,30 +455,6 @@
     min-height: 340px;
   }
 
-  .project-image-preview {
-    position: fixed;
-    width: clamp(260px, 30vw, 380px);
-    height: clamp(260px, 30vw, 380px);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    object-fit: cover;
-    z-index: 9998;
-    opacity: 0;
-    filter: grayscale(100%) brightness(0.4);
-    transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
-    pointer-events: none;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-  }
-
-  .project-card:hover .project-image-preview {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: grayscale(0%) brightness(1) contrast(1.05);
-  }
-
   .project-card > * {
     position: relative;
     z-index: 2;
@@ -1077,7 +1053,6 @@
   <div class="projects-grid">
     <a href="https://github.com/Ivann0730/JAVA-Capstone" target="_blank" class="project-card-link">
       <div class="project-card">
-        <img src="images/DannyGerman/462547802_962827752531968_921286692929183774_n.png" alt="Danny German Preview" class="project-image-preview">
         <div class="project-type">// 2D RPG · Game Dev</div>
         <span class="project-icon">🎮</span>
         <h3>#DannyGerman: The Bugged World</h3>
@@ -1092,7 +1067,6 @@
 
     <a href="https://github.com/Ivann0730/BORNEO26" target="_blank" class="project-card-link">
       <div class="project-card">
-        <img src="images/Borneo/s.png" alt="Borneo Preview" class="project-image-preview">
         <div class="project-type">// Hackathon · Climate Tech</div>
         <span class="project-icon">🌏</span>
         <h3>BORNEO26 / STEMMA</h3>
@@ -1107,7 +1081,6 @@
 
     <a href="https://github.com/alan-hiroshima/AppDev_Project" target="_blank" class="project-card-link">
       <div class="project-card">
-        <img src="images/Acadmeet/Find-Tutors.png" alt="AcadMeet Preview" class="project-image-preview">
         <div class="project-type">// Web Platform · Collab</div>
         <span class="project-icon">🤝</span>
         <h3>AcadMeet</h3>
@@ -1122,7 +1095,6 @@
 
     <a href="https://github.com/Smoll05/archives-mobile-development" target="_blank" class="project-card-link">
       <div class="project-card">
-        <img src="images/Archives/Developer Page.png" alt="Archives Preview" class="project-image-preview">
         <div class="project-type">// Mobile · Android</div>
         <span class="project-icon">📚</span>
         <h3>Archives</h3>
@@ -1151,7 +1123,6 @@
 
     <a href="https://github.com/Smoll05/hardstack-capstone" target="_blank" class="project-card-link">
       <div class="project-card">
-        <img src="images/Adventure of Joe and Marie/490985914_1393284168337933_6957351029495201762_n.png" alt="Joe and Marie Preview" class="project-image-preview">
         <div class="project-type">// Platformer · Collab</div>
         <span class="project-icon">🕹️</span>
         <h3>Adventures of Joe and Marie</h3>
