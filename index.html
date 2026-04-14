@@ -149,6 +149,197 @@
     margin: 0 auto;
     padding: 8rem 3rem 4rem;
     gap: 4rem;
+    position: relative;
+  }
+
+  /* Parallax depth effect */
+  .hero-left {
+    z-index: 2;
+  }
+
+  .hero-right-visual {
+    position: relative;
+    height: 520px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+  }
+
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(14, 165, 201, 0.08), rgba(14, 27, 39, 0.6));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 40% 40%, rgba(14, 165, 201, 0.15), transparent);
+    animation: depthPulse 4s ease-in-out infinite;
+  }
+
+  .hero-photo-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(14, 165, 201, 0.05) 50%, transparent 70%);
+    animation: shimmerFlow 6s ease-in-out infinite;
+  }
+
+  .placeholder-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .placeholder-icon {
+    font-size: 5rem;
+    opacity: 0.4;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .placeholder-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @keyframes depthPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+  }
+
+  @keyframes shimmerFlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes deepDiveIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateZ(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateZ(0);
+    }
+  }
+
+  @keyframes expandInPlace {
+    0% {
+      opacity: 0;
+      transform: scaleY(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes textShimmer {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  /* Scroll-triggered depth animations */
+  .parallax-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .parallax-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .parallax-item--stagger-1.visible { transition-delay: 0.1s; }
+  .parallax-item--stagger-2.visible { transition-delay: 0.2s; }
+  .parallax-item--stagger-3.visible { transition-delay: 0.3s; }
+  .parallax-item--stagger-4.visible { transition-delay: 0.4s; }
+  .parallax-item--stagger-5.visible { transition-delay: 0.5s; }
+
+  /* Word reveal animation */
+  .word-reveal {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .word-reveal span {
+    display: block;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .word-reveal span:nth-child(1) { animation-delay: 0.2s; }
+  .word-reveal span:nth-child(2) { animation-delay: 0.3s; }
+  .word-reveal span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Glow pulse on scroll */
+  .glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(14, 165, 201, 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(14, 165, 201, 0.6);
+    }
+  }
+
+  /* Fade in on scroll with color transition */
+  .color-fade {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .color-fade.visible {
+    opacity: 1;
   }
 
   .hero-tag {
@@ -447,12 +638,37 @@
     background: var(--bg2);
     padding: 2rem;
     position: relative;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     cursor: default;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     min-height: 430px;
+  }
+
+  .project-card > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .project-card:hover {
+    background: var(--bg3);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(14, 165, 201, 0.15);
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .project-card:hover::before {
+    background: linear-gradient(90deg, var(--ocean), transparent);
   }
 
   .project-carousel {
@@ -494,29 +710,6 @@
 
   .carousel-slide.active {
     opacity: 1;
-  }
-
-  .project-card > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  .project-card:hover {
-    background: var(--bg3);
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: transparent;
-    transition: background 0.3s;
-  }
-  .project-card:hover::before {
-    background: linear-gradient(90deg, var(--ocean), transparent);
   }
 
   .project-type {
@@ -851,6 +1044,24 @@
     transform: none;
   }
 
+  .projects-grid a:nth-child(1) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+  .projects-grid a:nth-child(2) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; }
+  .projects-grid a:nth-child(3) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+  .projects-grid a:nth-child(4) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; }
+  .projects-grid a:nth-child(5) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+  .projects-grid a:nth-child(6) .project-card { animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards; }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* --- RESPONSIVE --- */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
@@ -969,20 +1180,31 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">Available for Internships · Cebu, PH</div>
-    <h1>Building<br><em>systems</em> &amp;<br>digital worlds.</h1>
-    <p class="hero-desc">
+  <div class="hero-left parallax-item parallax-item--stagger-1">
+    <div class="hero-tag parallax-item parallax-item--stagger-1">Available for Internships · Cebu, PH</div>
+    <h1 class="parallax-item parallax-item--stagger-2">Building<br><em>systems</em> &amp;<br>digital worlds.</h1>
+    <p class="hero-desc parallax-item parallax-item--stagger-3">
       CS Student at CIT-U. I build everything from 2D RPGs to geospatial simulation platforms. When I'm not coding, I'm freediving — which teaches me the same thing: precision under pressure.
     </p>
-    <div class="hero-actions">
+    <div class="hero-actions parallax-item parallax-item--stagger-4">
       <a href="#projects" class="btn-primary">View Projects ↓</a>
       <a href="mailto:paradero730@gmail.com" class="btn-ghost">Contact Me</a>
     </div>
   </div>
 
-  <div class="hero-card">
-    <div class="depth-visual">
+  <!-- Hero Visual Section with Photo Placeholder -->
+  <div class="hero-card parallax-item parallax-item--stagger-2">
+    <div class="hero-right-visual glow-pulse">
+      <div class="hero-photo-placeholder">
+        <div class="placeholder-content">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Your Photo Here</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Stats Card Below -->
+    <div class="depth-visual" style="margin-top: 2rem;">
       <div class="depth-label">// current_status.json</div>
       <div class="stat-grid">
         <div class="stat-cell">
@@ -1360,24 +1582,81 @@
 
 function startHeroAnimation() {
     // Select elements to animate in
-    const elements = [
-        document.querySelector('.hero-tag'),
-        document.querySelector('.hero h1'),
-        document.querySelector('.hero-desc'),
-        document.querySelector('.hero-actions'),
-        document.querySelector('.hero-card')
-    ];
+    const parallaxItems = document.querySelectorAll('.hero .parallax-item');
 
-    elements.forEach((el, index) => {
+    parallaxItems.forEach((el) => {
         if(el) {
-            el.classList.add('initial-hide');
             setTimeout(() => {
-                el.classList.add('float-in');
-            }, 400 + (index * 150)); // Staggered entry
+                el.classList.add('visible');
+            }, 300);
         }
     });
 }
 
+  // Parallax scroll effect for depth feeling
+  function initParallaxScroll() {
+    const parallaxElements = document.querySelectorAll('.parallax-item');
+    
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    parallaxElements.forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Mouse parallax effect on hero section
+  function initHeroParallax() {
+    const hero = document.querySelector('.hero');
+    const heroRight = document.querySelector('.hero-card');
+    
+    if (!hero || !heroRight) return;
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      
+      heroRight.style.transform = `perspective(1000px) rotateY(${x * 0.5}deg) rotateX(${-y * 0.5}deg)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      heroRight.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+    });
+  }
+
+  // Scroll depth effect
+  function initScrollDepth() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const hero = document.querySelector('.hero');
+      
+      if (hero) {
+        hero.style.opacity = Math.max(0.3, 1 - scrolled / 800);
+        hero.style.transform = `translateY(${scrolled * 0.15}px)`;
+      }
+
+      // Depth glow pulse on scroll triggered sections
+      const glowElements = document.querySelectorAll('.glow-pulse');
+      glowElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.7;
+        
+        if (isVisible) {
+          el.style.boxShadow = `0 0 40px rgba(14, 165, 201, ${0.3 + scrolled / 3000})`;
+        }
+      });
+    });
+  }
 
   // Custom cursor
   const cursor = document.getElementById('cursor');
@@ -1430,17 +1709,30 @@ function startHeroAnimation() {
     });
   }
 
-  window.addEventListener('load', initProjectCarousels);
+  window.addEventListener('load', () => {
+    initProjectCarousels();
+    initParallaxScroll();
+    initHeroParallax();
+    initScrollDepth();
+  });
 
-  // Scroll reveal
+  // Scroll reveal with stagger effect
   const reveals = document.querySelectorAll('.reveal');
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
+    entries.forEach((e, index) => {
       if (e.isIntersecting) {
-        e.target.classList.add('visible');
+        setTimeout(() => {
+          e.target.classList.add('visible');
+        }, index * 50);
       }
     });
-  }, { threshold: 0.1 });
+  }, observerOptions);
+  
   reveals.forEach(r => observer.observe(r));
 </script>
 </body>
